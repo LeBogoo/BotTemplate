@@ -3,5 +3,28 @@
     "discord.js": "^12.5.3",
     "disrequire": "^1.1.2",
     "dotenv": "^10.0.0"
-  }
+  },
+  "name": "bottemplate",
+  "version": "1.0.0",
+  "description": "This is a template for Discord.js bots.",
+  "main": "bot.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeBogoo/BotTemplate.git"
+  },
+  "keywords": [
+    "Discord Bot",
+    "discord.js",
+    "template"
+  ],
+  "author": "LeBogo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeBogoo/BotTemplate/issues"
+  },
+  "homepage": "https://github.com/LeBogoo/BotTemplate#readme"
 }
