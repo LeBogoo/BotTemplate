@@ -5,4 +5,3 @@ The following feature are included:
 * JSON command handler
 * simple event handler
 * example commands
-Befehlshandler und Konfigurationserstellung hinzugefügt
