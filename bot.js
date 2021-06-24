@@ -4,6 +4,7 @@ require('dotenv').config();
 
 
 const client = new Discord.Client();
+require('discord-buttons')(client);
 
 const events = fs.readdirSync('./events');
 for (let event of events) {

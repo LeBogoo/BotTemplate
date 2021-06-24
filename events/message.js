@@ -1,3 +1,5 @@
+const commandHandler = require('../handlers/commandHandler.js');
+
 module.exports = {
     client: null,
     setup: async (c) => {
@@ -6,5 +8,6 @@ module.exports = {
     run: async (message) => {
         const { author, member, guild, channel, content, cleanContent } = message;
         console.log(`${guild.name} | #${channel.name} | ${author.username}: ${cleanContent}`);
+        commandHandler(message);
     }
 }

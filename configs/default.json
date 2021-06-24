@@ -1,0 +1,25 @@
+{
+    "prefix": "!",
+    "commands": {
+        "addcommand": {
+            "roles": [],
+            "script": "addcommand.js",
+            "protected": true
+        },
+        "deletecommand": {
+            "roles": [],
+            "script": "deletecommand.js",
+            "protected": true
+        },
+        "help": {
+            "roles": [],
+            "script": "help.js",
+            "protected": true
+        },
+        "hello": {
+            "roles": [],
+            "response": "Hi!",
+            "protected": false
+        }
+    }
+}
