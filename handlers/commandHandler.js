@@ -3,6 +3,7 @@ const disrequire = require('disrequire');
 
 module.exports = async (message) => {
     const { author, member, guild, channel, content, cleanContent } = message;
+    if (!guild) return;
     const configPath = `./configs/${guild.id}.json`;
     if (!fs.existsSync(configPath)) return;
 
