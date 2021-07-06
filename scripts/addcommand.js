@@ -76,7 +76,7 @@ module.exports = async (message) => {
     let confirmMessage = await channel.send({ embed: confirmationEmbed, buttons: [yes, no] })
 
     const collector = await confirmMessage.awaitButtons(() => true, { maxButtons: 1 });
-    await collector.first().defer(true);
+    await collector.first().reply.defer(true);
 
     if (collector.first().id == `${guild.id}_addcommand_yes`) {
         config.commands[commandName] = newCommand;

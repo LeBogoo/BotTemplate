@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "discord-buttons": "^3.2.1",
+    "discord-buttons": "^4.0.0",
     "discord.js": "^12.5.3",
     "disrequire": "^1.1.2",
     "dotenv": "^10.0.0"
