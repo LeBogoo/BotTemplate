@@ -6,6 +6,8 @@ module.exports = async (message) => {
     const { content, author, channel, guild, member, client } = message;
     const configPath = `./configs/${guild.id}.json`;
     const filter = (msg) => msg.author.id == author.id;
+    const invokedCommand = content.split(" ");
+    const args = invokedCommand.splice(1);
 
     let newCommand = {
         response: "",
@@ -14,14 +16,16 @@ module.exports = async (message) => {
     }
 
     let deleteMessages = [];
+    let commandName = args[0];
+    if (!commandName) {
+        deleteMessages.push(await channel.send("Please enter a command name:"))
 
-    deleteMessages.push(await channel.send("Please enter a command name:"))
+        let commandNameMessage = await channel.awaitMessages(filter, { max: 1 })
+        deleteMessages.push(commandNameMessage.first());
 
-    let commandNameMessage = await channel.awaitMessages(filter, { max: 1 })
-    deleteMessages.push(commandNameMessage.first());
-
-    let commandName = commandNameMessage.first().content;
-    if (commandName.length > 1999) return channel.send("Command cannot be longer than 2000 characters.");
+        commandName = commandNameMessage.first().content.split(" ")[0];
+        if (commandName.length > 1999) return channel.send("Command cannot be longer than 2000 characters.");
+    }
 
     let config = JSON.parse(fs.readFileSync(configPath));
     if (commandName in config.commands) return channel.send("Commmand already exists.");
