@@ -5,21 +5,31 @@ const { MessageButton } = require('discord-buttons');
 module.exports = async (message) => {
     const { content, author, channel, guild, member, client } = message;
     const configPath = `./configs/${guild.id}.json`;
+    const command = content.split(" ");
+    const args = command.splice(1);
+    const filter = (msg) => msg.author.id == author.id;
 
 
     let deleteMessages = [];
 
-    let command = content.split(" ");
-    let args = command.splice(1);
+    let commandName = args[0];
+    if (!commandName) {
+        deleteMessages.push(await channel.send("Please enter a command name:"))
 
+        let commandNameMessage = await channel.awaitMessages(filter, { max: 1 })
+        deleteMessages.push(commandNameMessage.first());
+
+        commandName = commandNameMessage.first().content.split(" ")[0];
+    }
+    console.log(commandName);
 
     let config = JSON.parse(fs.readFileSync(configPath));
 
-    if (!(args[0] in config.commands)) return channel.send("This command doesn't exist.");
-    if (config.commands[args[0]].protected) return channel.send("This command cannot be deleted.")
+    if (!(commandName in config.commands)) return channel.send("This command doesn't exist.");
+    if (config.commands[commandName].protected) return channel.send("This command cannot be deleted.")
     let confirmationEmbed = new discord.MessageEmbed();
-    confirmationEmbed.setTitle(`Do you really want to delete \`${config.prefix}${args[0]}\`?`);
-    confirmationEmbed.addField("Response:", config.commands[args[0]].response);
+    confirmationEmbed.setTitle(`Do you really want to delete \`${config.prefix}${commandName}\`?`);
+    confirmationEmbed.addField("Response:", config.commands[commandName].response);
 
     for (let msg of deleteMessages) msg.delete();
 
@@ -39,10 +49,10 @@ module.exports = async (message) => {
     await collector.first().reply.defer(true)
 
     if (collector.first().id == guild.id + "_deletecommand_yes") {
-        delete config.commands[args[0]];
+        delete config.commands[commandName];
         fs.writeFileSync(configPath, JSON.stringify(config));
 
-        channel.send(`Deleted command \`${args[0]}\`.`);
+        channel.send(`Deleted command \`${commandName}\`.`);
     } else {
         channel.send("Command deletion aborted.");
     }

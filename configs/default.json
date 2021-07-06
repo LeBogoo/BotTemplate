@@ -2,12 +2,22 @@
     "prefix": "!",
     "commands": {
         "addcommand": {
-            "roles": [],
+            "roles": [
+                "ADMIN"
+            ],
+            "args": [
+                "[?command]"
+            ],
             "script": "addcommand.js",
             "protected": true
         },
         "deletecommand": {
-            "roles": [],
+            "roles": [
+                "ADMIN"
+            ],
+            "args": [
+                "[?command]"
+            ],
             "script": "deletecommand.js",
             "protected": true
         },

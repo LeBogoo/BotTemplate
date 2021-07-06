@@ -22,6 +22,8 @@ module.exports = async (message) => {
         for (let role of cmd.roles) { if (memberRoles.includes(role)) allowed = true; break; }
     }
 
+    if (member.hasPermission("ADMINISTRATOR")) allowed = true;
+
     if (!allowed) return channel.send(`You don't have permission to use this command.`);
     if ('response' in cmd) return channel.send(cmd.response);
 
