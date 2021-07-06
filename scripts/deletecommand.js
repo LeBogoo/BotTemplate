@@ -21,7 +21,8 @@ module.exports = async (message) => {
 
         commandName = commandNameMessage.first().content.split(" ")[0];
     }
-    console.log(commandName);
+
+    commandName = commandName.toLowerCase();
 
     let config = JSON.parse(fs.readFileSync(configPath));
 

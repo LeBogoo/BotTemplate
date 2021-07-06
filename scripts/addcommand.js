@@ -27,6 +27,8 @@ module.exports = async (message) => {
         if (commandName.length > 1999) return channel.send("Command cannot be longer than 2000 characters.");
     }
 
+    commandName = commandName.toLowerCase();
+
     let config = JSON.parse(fs.readFileSync(configPath));
     if (commandName in config.commands) return channel.send("Commmand already exists.");
 

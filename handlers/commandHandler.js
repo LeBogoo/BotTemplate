@@ -12,7 +12,7 @@ module.exports = async (message) => {
 
     let command = cleanContent.replace(config.prefix, '').split(' ');
     let args = command.splice(1);
-
+    command = command[0].toLowerCase();
     if (!(command in config.commands)) return channel.send(`Command \`${command}\` doesn't exist.`);
     let cmd = config.commands[command];
     let allowed = cmd.roles.length == 0;
