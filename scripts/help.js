@@ -12,12 +12,17 @@ module.exports = (message) => {
 
     Object.keys(commands).forEach(commandName => {
         const command = commands[commandName];
-        if (command.roles.length == 0) return description += `${config.prefix}${commandName}\n`;
-        let allowed = member.hasPermission("ADMINISTRATOR");
-        command.roles.forEach(role => {
-            if (allowed) return;
-            console.log(role);
-        })
+
+        let allowed = command.roles.length == 0 || member.hasPermission("ADMINISTRATOR");
+
+        if (!allowed) {
+            command.roles.forEach(role => {
+                if (allowed) return;
+                if (member.roles.cache.get(role)) allowed = true;
+                console.log(role);
+            })
+        }
+
         if (allowed) {
             let args = "";
             if ("args" in command) {
